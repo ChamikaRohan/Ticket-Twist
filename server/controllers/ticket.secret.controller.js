@@ -15,3 +15,17 @@ export const createSecretTicket = async(req, res) =>{
         res.status(500).json({error: "Internal server error!"})
     }
 }
+
+export const getSecretTicket = async(req, res) =>{
+    try
+    {
+        const secret_id = req.params["secret_id"];
+        const secretTicket = await SecretTicket.findOne({secret_id});
+        if ( secretTicket == null ) return res.status(400).json({error: "Requested secret ticket cannot be found!"});
+        res.status(200).json(secretTicket);
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Internal server error!"})
+    }
+} 

@@ -15,3 +15,15 @@ export const createMainTicket = async(req, res) =>{
         res.status(500).json({error: "Internal server error!"})
     }
 }
+
+export const getAllMainTickets = async(req, res) => {
+    try
+    {
+        const allMainTickets = await MainTicket.find();
+        res.status(200).json(allMainTickets);
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Internal server error!"})
+    }
+}
