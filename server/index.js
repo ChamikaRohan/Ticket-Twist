@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import mainTicketRouter from "./routes/ticket.main.route.js"
 
 dotenv.config();
 
@@ -21,3 +22,5 @@ app.listen(PORT, ()=>{
 mongoose.connect(DB_URL)
     .then(()=>{console.log("Database connected successfully!");})
     .catch((error)=>{console.log("Database connected failed! \n",error.message);})
+
+app.use("/api/main-ticket", mainTicketRouter);
