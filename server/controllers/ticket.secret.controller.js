@@ -12,7 +12,7 @@ export const createSecretTicket = async(req, res) =>{
     }
     catch(error)
     {
-        res.status(500).json({error: "Internal server error!"})
+        res.status(500).json({error: "Internal server error!"});
     }
 }
 
@@ -26,6 +26,6 @@ export const getSecretTicket = async(req, res) =>{
     }
     catch(error)
     {
-        res.status(500).json({error: "Internal server error!"})
+        res.status(500).json({error: "Internal server error!"});
     }
 } 

@@ -18,7 +18,7 @@ const mainTicketSchema =  mongoose.Schema({
         required: "true",
         type: String
     },
-    ValidityState: {
+    validity_date: {
         required: true,
         type: Date
     },

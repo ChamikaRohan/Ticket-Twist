@@ -12,7 +12,7 @@ export const createMainTicket = async(req, res) =>{
     }
     catch(error)
     {
-        res.status(500).json({error: "Internal server error!"})
+        res.status(500).json({error: "Internal server error!"});
     }
 }
 
@@ -24,6 +24,20 @@ export const getAllMainTickets = async(req, res) => {
     }
     catch(error)
     {
-        res.status(500).json({error: "Internal server error!"})
+        res.status(500).json({error: "Internal server error!"});
+    }
+}
+
+export const getMainTicket = async(req, res) =>{
+    try
+    {
+        const {_id} = req.params;
+        const mainTicket = await MainTicket.findOne({_id});
+        if ( mainTicket == null ) return res.status(400).json({error: "Requested main ticket cannot be found!"});
+        res.status(200).json(mainTicket);    
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Internal server error!"});
     }
 }
