@@ -4,6 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import mainTicketRouter from "./routes/ticket.main.route.js"
+import secretTicketRouter from "./routes/ticket.secret.route.js"
 
 dotenv.config();
 
@@ -24,3 +25,4 @@ mongoose.connect(DB_URL)
     .catch((error)=>{console.log("Database connected failed! \n",error.message);})
 
 app.use("/api/main-ticket", mainTicketRouter);
+app.use("/api/secret-ticket", secretTicketRouter);

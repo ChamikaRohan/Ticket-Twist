@@ -37,10 +37,7 @@ const mainTicketSchema =  mongoose.Schema({
     },
     special_instructions: {
         type: String
-    },
-    secret_id: {
-        type: String
     }
 })
 
-export default mongoose.model("mainTickets", mainTicketSchema);
+export default mongoose.model("maintickets", mainTicketSchema);
