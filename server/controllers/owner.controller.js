@@ -1,13 +1,17 @@
 import Owner from "../models/owner.model.js"
+import bcryptjs from "bcryptjs"
 
-export const createOwner = async (req, res) =>{
+export const signupOwner = async (req, res) =>{
     try
     {
-        const reqOwner = new Owner(req.body);
-        const {email} = reqOwner;
+        const {email} = req.body;
         const ownerExists = await Owner.findOne({email});
         if ( ownerExists != null ) return res.status(400).json({error: "Owner already exists!"}); 
-        await reqOwner.save();
+
+        const {password} = req.body;
+        const hashshedPassword = bcryptjs.hashSync(password, 10);
+        const owner = new Owner({...req.body, password: hashshedPassword});
+        await owner.save();
         res.status(200).json({message: "Owner created successfully!"});
     }
     catch(error)
@@ -15,3 +19,6 @@ export const createOwner = async (req, res) =>{
         res.status(500).json({error: "Internal server error!"});
     }
 }
+
+
+

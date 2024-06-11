@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import mainTicketRouter from "./routes/ticket.main.route.js"
 import secretTicketRouter from "./routes/ticket.secret.route.js"
-import ownerRouter from "./routes/owner.model.js"
+import ownerRouter from "./routes/owner.route.js"
 
 dotenv.config();
 
