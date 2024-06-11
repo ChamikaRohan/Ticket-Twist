@@ -20,5 +20,9 @@ export const signupOwner = async (req, res) =>{
     }
 }
 
+export const signinOwner = async(req, res) =>{
+    res.status(200).json({message: "working"});
+}
+
 
 
