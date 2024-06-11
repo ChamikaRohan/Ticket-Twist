@@ -38,6 +38,6 @@ const mainTicketSchema =  mongoose.Schema({
     special_instructions: {
         type: String
     }
-})
+}, {timestamps: true});
 
 export default mongoose.model("maintickets", mainTicketSchema);
