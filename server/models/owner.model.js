@@ -20,7 +20,8 @@ const ownerSchema = mongoose.Schema({
     },
     phone_number: {
         required: true,
-        type: String
+        type: String,
+        unique: true
     },
     address: {
         required: true,
