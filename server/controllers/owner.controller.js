@@ -31,11 +31,8 @@ export const signinOwner = async(req, res) =>{
 
         if ( email == undefined )
         {
-            console.log("sdsd");
-            const userExists = await Owner.find({phone_number});
-            console.log(userExists == null);
-            if ( userExists == null ) return res.status(400).json({error: "Unautherized, Please Sign Up!"});
-            console.log(userExists);
+            const userExists = await Owner.findOne({phone_number});
+            if (userExists == null) return res.status(400).json({error: "Unautherized, Please Sign Up!"});
             const validPassword = bcryptjs.compareSync(password, userExists["password"]);
             if (validPassword == false) return res.status(401).json({error: "Invalid credentials!"});
             const token = jwt.sign({id: userExists["_id"]}, process.env.JWT_SECRET);
