@@ -41,3 +41,20 @@ export const getMainTicket = async(req, res) =>{
         res.status(500).json({error: "Internal server error!"});
     }
 }
+
+export const searchTicket = async(req, res)=>
+{
+    try
+    {
+        const paramsData = req.params;
+        const query = paramsData.query;
+        const tickets = await MainTicket.find({
+            $or:[{name: new RegExp(query, 'i')},
+                {category: new RegExp(query, 'i')}]});
+        res.status(200).json(tickets);
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Internal server error!"});
+    }
+}
