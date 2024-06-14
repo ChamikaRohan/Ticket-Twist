@@ -29,3 +29,19 @@ export const getSecretTicket = async(req, res) =>{
         res.status(500).json({error: "Internal server error!"});
     }
 } 
+
+export const deleteSecretTicket = async(req, res)=>{
+    try
+    {
+        const paramsData = req.params;
+        const {secret_id} = paramsData;
+        const secretTicketExists = await SecretTicket.findOne({secret_id});
+        if ( secretTicketExists == null ) return res.status(400).json({error: "Requested secret ticket cannot be found!"});
+        await SecretTicket.findOneAndDelete(secret_id);
+        res.status(200).json({message: "Secret ticket deleted sucessfully!"});
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Secret ticket deletion unsucessfull!!"});
+    }
+}

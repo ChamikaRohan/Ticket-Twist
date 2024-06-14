@@ -73,4 +73,4 @@ export const deleteTicket = async(req, res)=>{
     {
         res.status(500).json({error: "Main ticket deletion unsucessfull!!"});
     }
-    }
+}
