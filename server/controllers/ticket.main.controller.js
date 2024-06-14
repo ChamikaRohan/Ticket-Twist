@@ -58,3 +58,19 @@ export const searchTicket = async(req, res)=>
         res.status(500).json({error: "Internal server error!"});
     }
 }
+
+export const deleteTicket = async(req, res)=>{
+    try
+    {
+        const paramsData = req.params;
+        const {_id} = paramsData;
+        const mainTicketExists = await MainTicket.findOne({_id});
+        if ( mainTicketExists == null ) return res.status(400).json({error: "Requested main ticket cannot be found!"});
+        await MainTicket.findByIdAndDelete(_id);
+        res.status(200).json({message: "Main ticket deleted sucessfully!"});
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Main ticket deletion unsucessfull!!"});
+    }
+    }
