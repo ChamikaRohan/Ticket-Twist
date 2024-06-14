@@ -1,4 +1,6 @@
 import MainTicket from "../models/ticket.main.model.js"
+import { deleteSecretTicket } from "./ticket.secret.controller.js"
+import SecretTicket from "../models/ticket.secret.model.js"
 
 export const createMainTicket = async(req, res) =>{
     try
@@ -59,7 +61,7 @@ export const searchTicket = async(req, res)=>
     }
 }
 
-export const deleteTicket = async(req, res)=>{
+export const deleteMainTicket = async(req, res)=>{
     try
     {
         const paramsData = req.params;
@@ -72,5 +74,28 @@ export const deleteTicket = async(req, res)=>{
     catch(error)
     {
         res.status(500).json({error: "Main ticket deletion unsucessfull!!"});
+    }
+}
+
+export const deleteFullTicket = async(req, res)=>{
+    try
+    {
+        const paramsData = req.params;
+        const {_id} = paramsData;
+        const mainTicketExists = await MainTicket.findOne({_id});
+        if ( mainTicketExists == null ) return res.status(400).json({error: "Requested main ticket cannot be found!"});
+
+        const secret_id = _id;
+        const secretTicketExists = await SecretTicket.findOne({secret_id});
+        if ( secretTicketExists == null ) return res.status(400).json({error: "Requested secret ticket cannot be found!"});
+        
+        await SecretTicket.findOneAndDelete(secret_id);
+        await MainTicket.findByIdAndDelete(_id);
+
+        res.status(200).json({message: "Full ticket deleted sucessfully!"});
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Full ticket deletion unsucessfull!!"});
     }
 }
