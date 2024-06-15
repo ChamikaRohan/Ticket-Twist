@@ -5,9 +5,12 @@ import jwt from "jsonwebtoken";
 export const signupOwner = async (req, res) =>{
     try
     {
-        const {email} = req.body;
-        const ownerExists = await Owner.findOne({email});
-        if ( ownerExists != null ) return res.status(400).json({error: "Owner already exists!"}); 
+        const {email, phone_number} = req.body;
+        const ownerExistsMail = await Owner.findOne({email});
+        if ( ownerExistsMail != null ) return res.status(400).json({error: "Owner(email) already exists!"});
+        
+        const ownerExistsNum = await Owner.findOne({phone_number});
+        if ( ownerExistsNum != null ) return res.status(400).json({error: "Owner(phone number) already exists!"}); 
 
         const {password} = req.body;
         const hashshedPassword = bcryptjs.hashSync(password, 10);
