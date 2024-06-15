@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './SignUpPage.css';
+import { useNavigate } from "react-router-dom"
 
 export default function SignUpPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
+
+  const navigate =useNavigate();
 
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -28,6 +31,7 @@ export default function SignUpPage() {
       if (response.status === 200)
       {
         console.log(data.message);
+        navigate("/signin");
       }
       else
       {
