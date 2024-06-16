@@ -25,23 +25,32 @@ export default function SignInPage() {
     var data;
     if (isemail && !isnum)
     {
-      data = {email: emailornum}
+      const response = await fetch(`${apiURL}/owner/signin-owner`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({email: emailornum, password})
+      });
+      const data = await response.json();
+      console.log(response);
+
     }
     else if ( isnum && !isemail )
     {
-      data = {phone_number: emailornum}
+      const response = await fetch(`${apiURL}/owner/signin-owner`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({phone_number: emailornum, password})
+      });
+      const data = await response.json();
+      console.log(data.message);
     }
-    console.log(data);
-    const response = await fetch(`${apiURL}/owner/signin-owner`,{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({data})
-    });
-
-    console.log(response);
+    
   }
+  console.log(emailornum);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "black", height: "100%"}}>
