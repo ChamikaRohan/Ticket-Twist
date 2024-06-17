@@ -1,0 +1,14 @@
+.hero-section,
+.second-section {
+  height: 100vh; /* Full viewport height */
+}
+
+.hero-section {
+  background-image: url('path-to-your-hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.second-section {
+  /* Add any additional styles for the second section */
+}
