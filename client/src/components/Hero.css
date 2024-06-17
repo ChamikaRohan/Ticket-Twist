@@ -1,0 +1,86 @@
+.hero-section{
+  height: 100vh;
+}
+
+.hero-section {
+    background-image: url('../assets/HeroBG.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+.button-browse {
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all 0.5s ease;
+    font-family: "Poppins SemiBold";
+  }
+  
+  .button-browse:hover {
+    background-color: #f3a42f;
+    color: hsl(0, 0%, 100%);
+    box-shadow: #f3a42f;
+  }
+  
+  .button-browse:active {
+    letter-spacing: 1px;
+    background-color: #f3a42f;
+    color: hsl(0, 0%, 100%);
+    box-shadow: #f3a42f;
+    transform: translateY(5px);
+    transition: 100ms;
+  }
+  
+ /* Hero.css */
+
+.hero-section {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+h1 {
+  animation: slideIn 1.5s ease-in-out, colorWave 5s linear infinite;
+  background: linear-gradient(270deg, #ff4e50, #f9d423, #ff4e50);
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(-50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes colorWave {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+p {
+  animation: fadeInUp 2s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.button-browse {
+  animation: fadeIn 3s ease-in-out;
+  transition: transform 0.3s;
+}
+
+.button-browse:hover {
+  transform: scale(1.1);
+}
