@@ -19,38 +19,66 @@ export default function SignInPage() {
   };
 
   const handleSignIn = async(e)=> {
-    e.preventDefault();
-    const isemail = isValidEmail(emailornum);
-    const isnum = isValidPhoneNumber(emailornum);
-    var data;
-    if (isemail && !isnum)
+    try
     {
-      const response = await fetch(`${apiURL}/owner/signin-owner`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({email: emailornum, password})
-      });
-      const data = await response.json();
-      console.log(response);
+      e.preventDefault();
+      const isemail = isValidEmail(emailornum);
+      const isnum = isValidPhoneNumber(emailornum);
+      var data;
+      if (isemail && !isnum)
+      {
+        const response = await fetch(`${apiURL}/owner/signin-owner`,{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({email: emailornum, password})
+        });
+        const data = await response.json();
 
+        if (response.status === 200)
+        {
+          console.log(data);
+          navigate("/");
+        }
+        else
+        {
+          console.log(data.error);
+        }
+
+      }
+      else if ( isnum && !isemail )
+      {
+        const response = await fetch(`${apiURL}/owner/signin-owner`,{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({phone_number: emailornum, password})
+        });
+        const data = await response.json();
+        
+        if (response.status === 200)
+        {
+          console.log(data);
+          navigate("/");
+        }
+        else
+        {
+          console.log(data.error);
+        }
+
+      }
     }
-    else if ( isnum && !isemail )
+    catch(error)
     {
-      const response = await fetch(`${apiURL}/owner/signin-owner`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({phone_number: emailornum, password})
-      });
-      const data = await response.json();
-      console.log(data.message);
+      console.log(error.error);
     }
-    
   }
-  console.log(emailornum);
+
+  const handleSignUp = () =>{
+    navigate("/signup");
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "black", height: "100%"}}>
@@ -58,7 +86,7 @@ export default function SignInPage() {
       <form className="form">
 
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1>Hello there!</h1>
+          <h2>Hello there!</h2>
         </div>
       
         <div className="flex-column">
@@ -99,7 +127,7 @@ export default function SignInPage() {
           <span className="span">Forgot password?</span>
         </div>
         <button onClick={handleSignIn} className="button-submit">Sign In</button>
-        <p className="p">Don't have an account? <span className="span">Sign Up</span></p>
+        <p className="p">Don't have an account? <span className="span" onClick={handleSignUp}>Sign Up</span></p>
         <p className="p line">Or With</p>
         <div className="flex-row">
           <button className="btn google">

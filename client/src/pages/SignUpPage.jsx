@@ -44,10 +44,17 @@ export default function SignUpPage() {
     }
   }
 
+  const handleSignIn = () =>{
+    navigate("/signin");
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", backgroundColor: "black", height: "100%"}}>
       <form className="form">
-
+        
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h2>Let's Register!</h2>
+        </div>
 
         <div className="flex-column">
           <label>Name</label>
@@ -113,7 +120,7 @@ export default function SignUpPage() {
 
 
         <button onClick={handleSignUp} className="button-submit">Sign Up</button>
-        <p className="p">Already have an account? <span className="span">Sign In</span></p>
+        <p className="p">Already have an account? <span className="span" onClick={handleSignIn}>Sign In</span></p>
       </form>
     </div>
   );
