@@ -12,14 +12,18 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <Nav.Link href="#explore">Explore</Nav.Link>
+            <Nav.Link href="#pricing">Search</Nav.Link>
+            <NavDropdown title="Categories" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">ICC Cricket</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">IPL Cricket</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Musical Event</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Theatre and Performing Arts</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Football Match</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Theme Parks</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Attractions</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Fairs and Expos</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.4">Other</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link
@@ -27,9 +31,9 @@ export default function NavBar() {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link href="#deets">About</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+              Profile
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

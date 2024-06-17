@@ -8,10 +8,14 @@ export default function HomePage() {
     <div>
       {/* Full-Screen Hero Section */}
       <section className="hero-section d-flex justify-content-center align-items-center text-center text-white">
-        <div>
-          <h1 className="display-4">Welcome to Our Website</h1>
-          <p className="lead">We are glad to have you here.</p>
-          <a href="#next-section" className="btn btn-light">Learn More</a>
+        <div className='container' style={{ margin: "60px", maxWidth: "600px" }}>
+        <h1 className="display-4">Welcome to TicketTwist</h1>
+        <p className="display-6">Buy and Sell Event Tickets Easily!</p>
+        <p className="fs-6" >Find tickets for concerts, sports, theater, and more. Join a community of event enthusiasts and never miss out on your favorite events...</p>
+          <div style={{ display: "flex", gap: "10px", alignItems: "center", justifyContent: "center"}}>
+            <button className='button-browse' style={{ maxWidth: "150px"}} variant="light">Browse Tickets</button>
+            <button className='button-browse' style={{ maxWidth: "150px"}} variant="light">Sell Tickets</button>
+          </div>
         </div>
       </section>
 
