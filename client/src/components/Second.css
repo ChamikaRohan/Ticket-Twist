@@ -1,8 +1,25 @@
 .second-section {
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
+  padding: 60px 0;
 }
 
-.second-section {
-  /* Add any additional styles for the second section */
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.lead {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1rem;
+  color: #666;
+}

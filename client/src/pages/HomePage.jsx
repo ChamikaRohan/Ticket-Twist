@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import Hero from '../components/Hero';
 import Second from '../components/Second';
+import Footer from '../components/Footer';
 
 export default function HomePage() {
   return (
@@ -12,6 +13,8 @@ export default function HomePage() {
 
       {/* Full-Screen Second Section */}
       <Second/>
+
+      <Footer/>
     </div>
   )
 }
