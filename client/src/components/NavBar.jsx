@@ -12,7 +12,7 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#explore">Explore</Nav.Link>
+            <Nav.Link href="explore">Explore</Nav.Link>
             <Nav.Link href="#pricing">Search</Nav.Link>
             <NavDropdown title="Categories" id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">ICC Cricket</NavDropdown.Item>

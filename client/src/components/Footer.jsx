@@ -1,5 +1,6 @@
-import React from 'react'
-import "./Footer.css"
+import React from 'react';
+import './Footer.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
           <h4>Contact Us</h4>
           <p>Email: support@tickettwist.com</p>
           <p>Phone: (123) 456-7890</p>
-          <p>Address: PO Bo: 130, TRI, Hanthana, Kandy</p>
+          <p>Address: PO Box: 130, TRI, Hanthana, Kandy</p>
         </div>
         <div className="social-media">
           <a href="#" className="social-icon"><i className="fab fa-facebook-f"></i></a>
@@ -20,5 +21,5 @@ export default function Footer() {
         <p className="mt-4" style={{ color: '#f3a42f' }}>&copy; {new Date().getFullYear()} TicketTwist. All Rights Reserved.</p>
       </div>
     </footer>
-  )
+  );
 }

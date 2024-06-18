@@ -1,0 +1,25 @@
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .ticket-container > * {
+    flex: 1 1 350px; /* Ensures each card takes up at least 350px and flexes to fill space */
+    max-width: 100%;
+  }
+  
+  @media (min-width: 992px) {
+    .ticket-container > * {
+      flex: 1 1 calc(50% - 40px); /* Two cards per row with margin */
+      max-width: calc(50% - 40px);
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .ticket-container > * {
+      flex: 1 1 100%; /* One card per row */
+      max-width: 100%;
+    }
+  }
+  

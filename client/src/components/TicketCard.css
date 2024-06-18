@@ -1,0 +1,47 @@
+.ticket-card {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border: 2px solid #f3a42f;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px; /* Fixed width */
+    height: 150px; /* Fixed height */
+    margin: 20px;
+  }
+  
+  .ticket-photo {
+    width: 120px; /* Fixed width */
+    height: 100%; /* Full height */
+    object-fit: cover;
+    border-right: 2px solid #f3a42f;
+  }
+  
+  .ticket-details {
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .event-name {
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+  .event-date,
+  .event-location,
+  .ticket-price {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 2px 0;
+  }
+  
+  .ticket-price {
+    font-weight: bold;
+    color: #f3a42f;
+  }
+  
