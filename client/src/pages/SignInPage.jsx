@@ -54,7 +54,8 @@ export default function SignInPage() {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({phone_number: emailornum, password})
+          body: JSON.stringify({phone_number: emailornum, password}),
+          credentials: 'include'
         });
         const data = await response.json();
         
@@ -126,12 +127,12 @@ export default function SignInPage() {
           </div>
           <span className="span">Forgot password?</span>
         </div>
-        <button onClick={handleSignIn} className="button-submit">Sign In</button>
+        <button onClick={handleSignIn} style={{ color: "#f3a42f" }} className="button-submit">Sign In</button>
         <p className="p">Don't have an account? <span className="span" onClick={handleSignUp}>Sign Up</span></p>
         <p className="p line">Or With</p>
         <div className="flex-row">
-          <button className="btn google">
-            <svg version="1.1" width="20" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style={{enableBackground: 'new 0 0 512 512'}} xml:space="preserve">
+          <button className="btn google" style={{fontSize: "12px" }}>
+            <svg version="1.1" width="18" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style={{enableBackground: 'new 0 0 512 512', marginRight: "10px"}} xml:space="preserve">
               <path style={{fill: '#FBBB00'}} d="M113.47,309.408L95.648,375.94l-65.139,1.378C11.042,341.211,0,299.9,0,256c0-42.451,10.324-82.483,28.624-117.732h0.014l57.992,10.632l25.404,57.644c-5.317,15.501-8.215,32.141-8.215,49.456C103.821,274.792,107.225,292.797,113.47,309.408z"></path>
               <path style={{fill: '#518EF8'}} d="M507.527,208.176C510.467,223.662,512,239.655,512,256c0,18.328-1.927,36.206-5.598,53.451c-12.462,58.683-45.025,109.925-90.134,146.187l-0.014-0.014l-73.044-3.727l-10.338-64.535c29.932-17.554,53.324-45.025,65.646-77.911h-136.89V208.176h138.887L507.527,208.176L507.527,208.176z"></path>
               <path style={{fill: '#28B446'}} d="M416.253,455.624l0.014,0.014C372.396,490.901,316.666,512,256,512c-97.491,0-182.252-54.491-225.491-134.681l82.961-67.91c21.619,57.698,77.994,99.039,142.53,99.039c27.48,0,53.165-7.354,75.188-20.174L416.253,455.624z"></path>
@@ -139,8 +140,8 @@ export default function SignInPage() {
             </svg>
             Sign in with Google
           </button>
-          <button className="btn facebook">
-            <svg width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <button className="btn facebook" style={{ fontSize: "12px" }}>
+            <svg width="18" xmlns="http://www.w3.org/2000/svg" style={{marginRight: "10px"}} viewBox="0 0 24 24">
               <path d="M12 2.04C6.477 2.04 2 6.517 2 12.04c0 4.866 3.657 8.87 8.438 9.805v-6.93h-2.54v-2.875h2.54v-2.193c0-2.505 1.492-3.89 3.774-3.89 1.094 0 2.24.195 2.24.195v2.48h-1.26c-1.242 0-1.628.771-1.628 1.562v1.846h2.773l-.443 2.875h-2.33V21.84C18.343 20.907 22 16.905 22 12.04c0-5.522-4.477-10-10-10z"/>
             </svg>
             Sign in with Facebook

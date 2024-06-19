@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../assets/Logo.png"
 
 export default function NavBar() {
+  
   return (
     <Navbar  fixed="top" collapseOnSelect expand="lg" style={{ backgroundColor: "white" }} >
       <Container>
@@ -32,8 +33,8 @@ export default function NavBar() {
           </Nav>
           <Nav>
             <Nav.Link href="#deets">About</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Profile
+            <Nav.Link eventKey={2} href="/signup">
+              Switch to Selling
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

@@ -7,11 +7,16 @@ import mainTicketRouter from "./routes/ticket.main.route.js"
 import secretTicketRouter from "./routes/ticket.secret.route.js"
 import ownerRouter from "./routes/owner.route.js"
 
+const corsOptions = {
+    origin: process.env.CLIENT_URL, 
+    credentials: true 
+  };
+
 dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT;

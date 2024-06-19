@@ -119,7 +119,7 @@ export default function SignUpPage() {
         </div>
 
 
-        <button onClick={handleSignUp} className="button-submit">Sign Up</button>
+        <button onClick={handleSignUp} className="button-submit" style={{ color: "#f3a42f" }}>Sign Up</button>
         <p className="p">Already have an account? <span className="span" onClick={handleSignIn}>Sign In</span></p>
       </form>
     </div>

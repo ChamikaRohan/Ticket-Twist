@@ -59,5 +59,7 @@ export const signinOwner = async(req, res) =>{
     }
 }
 
-
+export const auth = async (req, res) =>{
+    res.status(200).json({user: true});
+}
 
