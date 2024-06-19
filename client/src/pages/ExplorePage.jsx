@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Footer from '../components/Footer.jsx';
 import TicketCard from '../components/TicketCard';
 import './ExplorePage.css';
+import Layout from '../components/Layout.jsx'
 
 export default function ExplorePage() {
 const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -19,17 +20,21 @@ const getTickets = async() =>{
 }
 
   return (
+    <Layout>
     <section className="d-flex justify-content-center align-items-center text-center text-white">
       <div className="container" style={{ margin: '20px', maxWidth: '800px' }}>
         <h2 className="fw-bolder display-5" style={{ color: '#f3a42f' }}>Explore Tickets</h2>
         <div className="ticket-container">
-          {tickets.map((ticket)=>(
+          
+          {tickets.length > 0  ?
+          (tickets.map((ticket)=>(
             <TicketCard ticket={ticket} />
-          )) }
-           
+          ))):
+          <p style={{ color: "red" }}>Currently there are no available options.</p>}
+
         </div>
-        <Footer />
       </div>
     </section>
+    </Layout>
   );
 }
