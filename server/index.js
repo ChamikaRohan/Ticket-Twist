@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import mainTicketRouter from "./routes/ticket.main.route.js"
 import secretTicketRouter from "./routes/ticket.secret.route.js"
 import ownerRouter from "./routes/owner.route.js"
+import cookieParser from 'cookie-parser';
 
 const corsOptions = {
     origin: process.env.CLIENT_URL, 
@@ -15,6 +16,7 @@ const corsOptions = {
 dotenv.config();
 
 const app = express();
+app.use(cookieParser());
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());

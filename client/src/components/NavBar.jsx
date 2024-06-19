@@ -3,9 +3,22 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Logo from "../assets/Logo.png"
+import { useEffect, useState } from 'react';
+import { checkUser } from '../middlewares/CheckUser';
 
 export default function NavBar() {
-  
+  const [userStatus, setUserStatus] = useState(false);
+
+  const fetchUserStatus = async () => {
+    const checkedUser = await checkUser();
+    setUserStatus(checkedUser);
+  };
+
+  useEffect(() => {
+    fetchUserStatus();
+  }, []);
+
+  console.log(useState);
   return (
     <Navbar  fixed="top" collapseOnSelect expand="lg" style={{ backgroundColor: "white" }} >
       <Container>
@@ -33,8 +46,8 @@ export default function NavBar() {
           </Nav>
           <Nav>
             <Nav.Link href="#deets">About</Nav.Link>
-            <Nav.Link eventKey={2} href="/signup">
-              Switch to Selling
+            <Nav.Link eventKey={2} href={userStatus? "/#profile": "/signup"}>
+              {userStatus ? "Profile" : "Switch to Selling"}
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
