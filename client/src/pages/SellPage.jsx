@@ -16,6 +16,9 @@ export default function SellPage() {
   const [section, setSection] = useState('');
   const [ticketType, setTicketType] = useState('');
   const [specialInstructions, setSpecialInstructions] = useState('');
+  const [barcode, setBarcode] = useState('');
+  const [qrcode, setQrcode] = useState('');
+  const [validationcode, setValidationcode] = useState('');
   const [selectedImg, setSelectedImg] = useState('');
   const [imageId, setImageId] = useState('');
 
@@ -91,6 +94,9 @@ export default function SellPage() {
     setSpecialInstructions('');
     setSelectedImg('');
     setImageId('');
+    setBarcode('');
+    setQrcode('');
+    setValidationcode('');
   };
 
   return (
@@ -162,7 +168,7 @@ export default function SellPage() {
 
               <Form.Group as={Row} className="mb-3" controlId="formValidityDate">
                 <Form.Label column sm={2}>
-                  Validity Date
+                  Valid Date
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
@@ -192,7 +198,7 @@ export default function SellPage() {
 
               <Form.Group as={Row} className="mb-3" controlId="formSeatNumber">
                 <Form.Label column sm={2}>
-                  Seat Number
+                  Seat No.
                 </Form.Label>
                 <Col sm={10}>
                   <Form.Control
@@ -246,9 +252,51 @@ export default function SellPage() {
                 </Col>
               </Form.Group>
 
+              <Form.Group as={Row} className="mb-3" controlId="formBarcode">
+                <Form.Label column sm={2}>
+                  Barcode
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Barcode ID"
+                    value={barcode}
+                    onChange={(e) => setBarcode(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="formQrcode">
+                <Form.Label column sm={2}>
+                  QR code
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter QR code ID"
+                    value={qrcode}
+                    onChange={(e) => setQrcode(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+
+              <Form.Group as={Row} className="mb-3" controlId="formValidationcode">
+                <Form.Label column sm={2}>
+                    Validation code
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter ticket validation code"
+                    value={validationcode}
+                    onChange={(e) => setValidationcode(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+
               <Form.Group as={Row} className="mb-3" controlId="formImageUpload">
                 <Form.Label column sm={2}>
-                  Ticket Image
+                  Ticket/Event Image
                 </Form.Label>
                 <Col sm={10}>
                   <div className="d-flex">
@@ -266,11 +314,12 @@ export default function SellPage() {
               </Form.Group>
 
               <div className="text-center mt-4">
-                <Button variant="primary" onClick={handleSubmit} disabled={!imgUploadStatus}>
-                  Submit
-                </Button>
-                <Button variant="primary" onClick={handleClear}>
+                <Button variant="primary" style={{ backgroundColor: "#f3a42f" }} onClick={handleClear}>
                   Clear
+                </Button>
+
+                <Button variant="primary" style={{ backgroundColor: "#f3a42f" }} onClick={handleSubmit} disabled={!imgUploadStatus}>
+                  Submit
                 </Button>
               </div>
             </Form>

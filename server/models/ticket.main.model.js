@@ -15,7 +15,7 @@ const mainTicketSchema =  mongoose.Schema({
         type: String
     },
     location: {
-        required: "true",
+        required: true,
         type: String
     },
     validity_date: {
