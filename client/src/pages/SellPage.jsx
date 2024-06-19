@@ -165,15 +165,26 @@ export default function SellPage() {
                   Category
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter category"
+                  <Form.Select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                     required
-                  />
+                  >
+                    <option value="">Select category</option>
+                    <option value="ICC Cricket">ICC Cricket</option>
+                    <option value="IPL Cricket">IPL Cricket</option>
+                    <option value="Musical Event">Musical Event</option>
+                    <option value="Movie">Movie</option>
+                    <option value="Theatre and Performing Arts">Theatre and Performing Arts</option>
+                    <option value="Football Match">Football Match</option>
+                    <option value="Theme Parks">Theme Parks</option>
+                    <option value="Attractions">Attractions</option>
+                    <option value="Fairs and Expos">Fairs and Expos</option>
+                    <option value="Festivals">Festivals</option>
+                    <option value="Other">Other</option>
+                  </Form.Select>
                 </Col>
-              </Form.Group>
+            </Form.Group>
 
               <Form.Group as={Row} className="mb-3" controlId="formLocation">
                 <Form.Label column sm={2}>
@@ -322,16 +333,19 @@ export default function SellPage() {
                 <Form.Label column sm={2}>
                   Ticket/Event Image
                 </Form.Label>
-                <Col sm={10}>
+                <Col sm={10} >
                   <div className="d-flex">
                     <Form.Control
                       type="file"
                       accept="image/*"
                       onChange={(e) => setSelectedImg(e.target.files[0])}
                       className="me-2"
+                      style={{
+                        marginTop: '10px'
+                      }}
                     />
                     <Button variant="primary" onClick={handlePictureUpload} disabled={imgLoading}>
-                      {imgLoading ? <Spinner animation="border" size="sm" /> : 'Upload'}
+                      {imgLoading ? <Spinner animation="border" size="sm"/> : 'Upload'}
                     </Button>
                   </div>
                 </Col>
