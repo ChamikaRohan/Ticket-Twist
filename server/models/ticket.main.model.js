@@ -37,6 +37,10 @@ const mainTicketSchema =  mongoose.Schema({
     },
     special_instructions: {
         type: String
+    },
+    image: {
+        required: true,
+        type: String
     }
 }, {timestamps: true});
 

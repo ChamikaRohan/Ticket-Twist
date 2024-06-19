@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import Layout from '../components/Layout';
-//import { Toaster, toast } from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function SellPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -20,32 +20,36 @@ export default function SellPage() {
   const [qrcode, setQrcode] = useState('');
   const [validationcode, setValidationcode] = useState('');
   const [selectedImg, setSelectedImg] = useState('');
-  const [imageId, setImageId] = useState('');
+  const [imageURL, setImageURL] = useState('');
 
   const [imgUploadStatus, setImgUploadStatus] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
 
   const handlePictureUpload = async (e) => {
-    setImgLoading(true);
     e.preventDefault();
     if (!selectedImg) {
       console.log('No file selected!');
       return;
     }
+    setImgLoading(true);
     const formData = new FormData();
     formData.append('file', selectedImg);
 
     try {
-      const response = await fetch(`${apiURL}/recipe/createrecipeimg`, {
+      const response = await fetch(`${apiURL}/main-ticket/create-ticketimg`, {
         method: 'POST',
         body: formData,
       });
+
       const data = await response.json();
       console.log(data.message);
-      setImageId(data.id);
+      setImageURL(data.downloadURL);
       setImgUploadStatus(true);
       setImgLoading(false);
+
+      toast.success('Ticket image added successfully!', { duration: 1500 });
     } catch (error) {
+      toast.error('Failed to add the ticket image!', { duration: 1500 });
       setImgLoading(false);
       console.log(error);
     }
@@ -53,7 +57,7 @@ export default function SellPage() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch(`${apiURL}/recipe/createrecipe`, {
+      const response = await fetch(`${apiURL}/main-ticket/create-main-ticket`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -69,14 +73,34 @@ export default function SellPage() {
           section,
           ticket_type: ticketType,
           special_instructions: specialInstructions,
-          imageId,
+          image: imageURL,
         }),
       });
+
       const data = await response.json();
-      //toast.success('Ticket added successfully!', { duration: 1500 });
+      const secret_id = data.id;
+      console.log(data.message);
+
+      const secret_response = await fetch(`${apiURL}/secret-ticket/create-secret-ticket`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          secret_id,
+          barcode,
+          qrcode,
+          validation_code: validationcode
+        }),
+      });
+
+      const secret_data = await secret_response.json();
+      console.log(secret_data.message);
+
       handleClear();
+      toast.success('Ticket added successfully!', { duration: 1500 });
     } catch (error) {
-      //toast.error('Failed to add the ticket!', { duration: 1500 });
+      toast.error('Failed to add the ticket!', { duration: 1500 });
       console.log(error.message);
     }
   };
@@ -93,7 +117,7 @@ export default function SellPage() {
     setTicketType('');
     setSpecialInstructions('');
     setSelectedImg('');
-    setImageId('');
+    setImageURL('');
     setBarcode('');
     setQrcode('');
     setValidationcode('');
@@ -314,11 +338,11 @@ export default function SellPage() {
               </Form.Group>
 
               <div className="text-center mt-4">
-                <Button variant="primary" style={{ backgroundColor: "#f3a42f" }} onClick={handleClear}>
+                <Button variant="primary" onClick={handleClear}>
                   Clear
                 </Button>
 
-                <Button variant="primary" style={{ backgroundColor: "#f3a42f" }} onClick={handleSubmit} disabled={!imgUploadStatus}>
+                <Button variant="primary" onClick={handleSubmit} disabled={!imgUploadStatus}>
                   Submit
                 </Button>
               </div>
@@ -326,7 +350,7 @@ export default function SellPage() {
           </div>
         </div>
       </section>
-        {/* <Toaster position="top-center" reverseOrder={false} /> */}
+        <Toaster position="top-center" reverseOrder={false} />
     </Layout>
   );
 };

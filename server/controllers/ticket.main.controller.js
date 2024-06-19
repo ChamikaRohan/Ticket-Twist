@@ -16,8 +16,8 @@ export const createMainTicket = async(req, res) =>{
         const ticket_id = reqMainTicket["ticket_id"];
         const ticketExists = await MainTicket.findOne({ticket_id});
         if ( ticketExists != null ) return res.status(400).json({error: "Ticket already added to the system!"});
-        reqMainTicket.save();
-        res.status(201).json({message: "Ticket saved successfully!"});
+        const ticket = await reqMainTicket.save();
+        res.status(201).json({message: "Ticket saved successfully!", id: ticket._id});
     }
     catch(error)
     {
