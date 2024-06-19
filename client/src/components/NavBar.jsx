@@ -18,7 +18,6 @@ export default function NavBar() {
     fetchUserStatus();
   }, []);
 
-  console.log(useState);
   return (
     <Navbar  fixed="top" collapseOnSelect expand="lg" style={{ backgroundColor: "white" }} >
       <Container>
@@ -43,6 +42,7 @@ export default function NavBar() {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
+            {userStatus? <Nav.Link href="#pricing">Sell</Nav.Link> : ''}
           </Nav>
           <Nav>
             <Nav.Link href="#deets">About</Nav.Link>

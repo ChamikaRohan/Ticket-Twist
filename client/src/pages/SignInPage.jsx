@@ -32,7 +32,8 @@ export default function SignInPage() {
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({email: emailornum, password})
+          body: JSON.stringify({email: emailornum, password}),
+          credentials: 'include'
         });
         const data = await response.json();
 
