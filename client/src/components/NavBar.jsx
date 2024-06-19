@@ -42,7 +42,7 @@ export default function NavBar() {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
-            {userStatus? <Nav.Link href="#pricing">Sell</Nav.Link> : ''}
+            {userStatus? <Nav.Link href="/sell-ticket">Sell</Nav.Link> : ''}
           </Nav>
           <Nav>
             <Nav.Link href="#deets">About</Nav.Link>
