@@ -26,9 +26,6 @@ const ownerSchema = mongoose.Schema({
     address: {
         required: true,
         type: String
-    },
-    tickets: {
-        type: String
     }
 }, {timestamps: true});
 

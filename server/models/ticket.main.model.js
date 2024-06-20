@@ -41,6 +41,10 @@ const mainTicketSchema =  mongoose.Schema({
     image: {
         required: true,
         type: String
+    },
+    owner_id: {
+        required: true,
+        type: String
     }
 }, {timestamps: true});
 

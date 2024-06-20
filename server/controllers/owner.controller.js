@@ -63,3 +63,16 @@ export const auth = async (req, res) =>{
     res.status(200).json({user: true});
 }
 
+export const getOwner = async (req, res) =>{
+    try
+    {
+        const _id = req.params.owner_id;
+        const owner = await Owner.findOne({_id});
+        if (owner == null) return res.status(400).json({error: "Unautherized owner, ticket is not valid!"});
+        res.status(200).json({owner});
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Internal server error!"});
+    }
+}
