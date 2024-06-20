@@ -1,65 +1,104 @@
-import React, { useEffect, useState } from 'react'
-import Layout from '../components/Layout.jsx'
+import React, { useEffect, useState } from 'react';
+import Layout from '../components/Layout';
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faPhone, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import './ViewTicketPage.css'; // Make sure to import your CSS file
 
 export default function ViewTicketPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
 
-  const [mainTicket, setMainTicket] = useState();
-  const [ticketowner, setTicketowner] = useState();
-
+  const [mainTicket, setMainTicket] = useState(null);
+  const [ticketOwner, setTicketOwner] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { _id } = useParams();
 
   useEffect(() => {
     const getTicketDetails = async () => {
-      try 
-      {
+      try {
         const response = await fetch(`${apiURL}/main-ticket/get-main-ticket/${_id}`);
         const data = await response.json();
         setMainTicket(data);
-      } 
-      catch (error) 
-      {
-        console.log(error);
+      } catch (error) {
+        console.error('Error fetching ticket details:', error);
       }
     };
 
-    getTicketDetails();
-  }, [_id]);
+    if (_id) {
+      getTicketDetails();
+    }
+  }, [_id, apiURL]);
 
   useEffect(() => {
     const getOwnerDetails = async () => {
       if (mainTicket && mainTicket.owner_id) {
-        try 
-        {
+        try {
           const { owner_id } = mainTicket;
-          const response = await fetch(`${apiURL}/owner//get-owner/${owner_id}`, {
-            method: "POST",
+          const response = await fetch(`${apiURL}/owner/get-owner/${owner_id}`, {
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json"
+              'Content-Type': 'application/json'
             }
           });
           const data = await response.json();
-          setTicketowner(data);
-        }
-        catch (error) 
-        {
-          console.log(error);
+          setTicketOwner(data.owner);
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          console.error('Error fetching owner details:', error);
         }
       }
     };
 
-    getOwnerDetails();
-  }, [mainTicket]);
+    if (mainTicket) {
+      getOwnerDetails();
+    }
+  }, [mainTicket, apiURL]);
 
-  console.log(ticketowner);
+  console.log(ticketOwner);
+
   return (
     <Layout>
-    <section className="d-flex justify-content-center align-items-center text-center text-white">
-      <div className="container" style={{ margin: '20px', maxWidth: '800px' }}>
-        <h2 className="fw-bolder display-5" style={{ color: '#f3a42f' }}>View Ticket Details</h2>
-      </div>
-    </section>
+      <section className="py-5">
+        <div className="container">
+          <h2 className="fw-bolder text-center mb-4" style={{ color: '#f3a42f' }}>View Ticket Details</h2>
+          <div className="row justify-content-center">
+            <div className="col-lg-8">
+            {loading? 
+              <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", marginTop: "70px" }}>
+              <div class="view-ticket-loader"></div>
+              </div>
+              :
+              (<div className="card shadow position-relative glowing-border">
+                  <img src={mainTicket.image} className="img-fluid rounded-top ticket-image" alt="Ticket Image" />
+                  <div className="card-body">
+                    <h4 className="card-title">{mainTicket.name}</h4>
+                    <p className="card-text">{mainTicket.description}</p>
+                    <p className="card-text">
+                      This ticket is for a <strong>{mainTicket.category}</strong> event 
+                      taking place at <strong>{mainTicket.location}</strong>. 
+                      The seat is <strong>{mainTicket.seat_number}</strong> in the <strong>{mainTicket.section}</strong> section, 
+                      and it is a <strong>{mainTicket.ticket_type}</strong> ticket.
+                    </p>
+                    <p className="card-text">
+                      <strong>Validity Date:</strong> <span className="text-danger fw-bold">{new Date(mainTicket.validity_date).toLocaleDateString()}</span>
+                    </p>
+                    <p className="card-text">
+                      <strong>Price :</strong> <span className="text-danger fw-bold">{mainTicket.price_lkr} LKR</span>
+                    </p>
+                      <div>
+                        <h5 className="card-title mt-4">Contact Ticket Owner</h5>
+                        <p className="card-text"><FontAwesomeIcon icon={faUser} /> <strong>Name:</strong> {ticketOwner.first_name} {ticketOwner.last_name}</p>
+                        <p className="card-text"><FontAwesomeIcon icon={faPhone} /> <strong>Tel:</strong> {ticketOwner.phone_number}</p>
+                        <p className="card-text"><FontAwesomeIcon icon={faEnvelope} /> <strong>Email:</strong> {ticketOwner.email}</p>
+                      </div>
+                  </div>
+                </div>)}
+
+            </div>
+          </div>
+        </div>
+      </section>
     </Layout>
-  )
+  );
 }

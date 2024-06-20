@@ -1,36 +1,47 @@
-.ticket-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.ticket-image {
+    max-height: 100%;
+    height: auto;
+    max-width: 500px; /* Adjust maximum height as needed */
+    display: block;
+    margin: 0 auto; /* Center the image horizontally */
   }
   
-  .ticket-container > * {
-    flex: 1 1 350px; /* Ensures each card takes up at least 350px and flexes to fill space */
-    max-width: 100%;
-  }
-  
-  @media (min-width: 992px) {
-    .ticket-container > * {
-      flex: 1 1 calc(50% - 40px); /* Two cards per row with margin */
-      max-width: calc(50% - 40px);
+  @media (max-width: 768px) {
+    .ticket-image {
+      max-height: 150px; /* Smaller height for mobile screens */
     }
   }
   
-  @media (max-width: 991px) {
-    .ticket-container > * {
-      flex: 1 1 100%; /* One card per row */
-      max-width: 100%;
-    }
+  .card-text strong {
+    font-weight: bold;
   }
-
-  .explore-loader {
+  
+  .card-text .text-danger {
+    color: #dc3545; /* Red color for price */
+    font-size: 1.2rem; /* Adjust font size as needed */
+  }
+  
+  @keyframes glowing {
+    0% { box-shadow: 0 0 5px #f3a42f; }
+    50% { box-shadow: 0 0 20px #f3a42f; }
+    100% { box-shadow: 0 0 5px #f3a42f; }
+  }
+  
+  .glowing-border {
+    animation: glowing 1.5s infinite;
+    border: 2px solid #f3a42f;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .view-ticket-loader {
     position: relative;
     width: 2.5em;
     height: 2.5em;
     transform: rotate(165deg);
    }
    
-   .explore-loader:before, .explore-loader:after {
+   .view-ticket-loader:before, .view-ticket-loader:after {
     content: "";
     position: absolute;
     top: 50%;
@@ -42,11 +53,11 @@
     transform: translate(-50%, -50%);
    }
    
-   .explore-loader:before {
+   .view-ticket-loader:before {
     animation: before8 2s infinite;
    }
    
-   .explore-loader:after {
+   .view-ticket-loader:after {
     animation: after6 2s infinite;
    }
    
@@ -92,8 +103,6 @@
     }
    }
    
-   .explore-loader {
+   .view-ticket-loader {
     position: relative;
-    
    }
-  
