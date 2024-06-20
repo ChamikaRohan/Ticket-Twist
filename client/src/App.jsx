@@ -5,6 +5,7 @@ import SignUpPage from "./pages/SignUpPage.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import ExplorePage from './pages/ExplorePage.jsx'
 import SellPage from './pages/SellPage.jsx'
+import ViewTicketPage from './pages/ViewTicketPage.jsx'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/signin" element={<SignInPage/>}/>
         <Route path="/explore" element={<ExplorePage/>} />
         <Route path="/sell-ticket" element={<SellPage/>} />
+        <Route path="/view-ticket/:_id" element={<ViewTicketPage/>} />
       </Routes>
     </Router>
   )
