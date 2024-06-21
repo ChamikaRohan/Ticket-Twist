@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SignInPage.css';
 import { useNavigate } from "react-router-dom"
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function SignInPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -40,10 +41,15 @@ export default function SignInPage() {
         if (response.status === 200)
         {
           console.log(data);
-          navigate("/");
+          toast.success('Sign In successfully!', { duration: 1500 });
+          setTimeout(()=>{
+            navigate("/");
+          }, 1600);
         }
         else
         {
+          toast.error('Sign In unsuccessfull!', { duration: 1500 });
+          toast.error(`${data.error}`, { duration: 1500 });
           console.log(data.error);
         }
 
@@ -62,11 +68,16 @@ export default function SignInPage() {
         
         if (response.status === 200)
         {
+          toast.success('Sign In successfully!', { duration: 1500 });
+          setTimeout(()=>{
+            navigate("/");
+          }, 1600);
           console.log(data);
-          navigate("/");
         }
         else
         {
+          toast.error('Sign In unsuccessfull!', { duration: 1500 });
+          toast.error(`${data.error}`, { duration: 1500 });
           console.log(data.error);
         }
 
@@ -74,7 +85,9 @@ export default function SignInPage() {
     }
     catch(error)
     {
-      console.log(error.error);
+      toast.error('Sign In unsuccessfull!', { duration: 1500 });
+      toast.error(`${error}`, { duration: 1500 });
+      console.log(error);
     }
   }
 
@@ -149,6 +162,7 @@ export default function SignInPage() {
           </button>
         </div>
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

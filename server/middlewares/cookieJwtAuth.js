@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 
 export const cookieJwtAuth = (req, res, next)=>{
     const token = req.cookies.access_token;
-    console.log("Inside cookieJwtAuth-backend ",token);
     if (!token) {return res.status(401).json({ message: 'Unauthorized: No token provided' });};
 
     try {

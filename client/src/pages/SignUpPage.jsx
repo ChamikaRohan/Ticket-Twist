@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './SignUpPage.css';
 import { useNavigate } from "react-router-dom"
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function SignUpPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -31,15 +32,22 @@ export default function SignUpPage() {
       if (response.status === 200)
       {
         console.log(data.message);
-        navigate("/signin");
+        toast.success('Sign Up successfully!', { duration: 1500 });
+        setTimeout(()=>{
+          navigate("/signin");
+        }, 1600);
       }
       else
       {
+        toast.error('Sign Up unsuccessfull!', { duration: 1500 });
+        toast.error(`${data.error}`, { duration: 1500 });
         console.log(data.error);
       }
     }
     catch(error)
     {
+      toast.error('Sign Up unsuccessfull!', { duration: 1500 });
+      toast.error(`${error}`, { duration: 1500 });
       console.log(error);
     }
   }
@@ -122,6 +130,7 @@ export default function SignUpPage() {
         <button onClick={handleSignUp} className="button-submit" style={{ color: "#f3a42f" }}>Sign Up</button>
         <p className="p">Already have an account? <span className="span" onClick={handleSignIn}>Sign In</span></p>
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
