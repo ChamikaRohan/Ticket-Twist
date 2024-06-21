@@ -106,3 +106,82 @@
    .view-ticket-loader {
     position: relative;
    }
+
+   .playstore-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000;
+    border-radius: 9999px;
+    background-color: #f3a42f;
+    padding: 0.625rem 1.5rem;
+    text-align: center;
+    color: black;
+    outline: 0;
+    transition: all  .2s ease;
+    text-decoration: none;
+  }
+  
+  .playstore-button:hover {
+    background-color: transparent;
+    color: rgba(01, 0, 0, 1);
+  }
+  
+  .icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  
+  .texts {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+  }
+  
+
+  .text-1 {
+    margin-bottom: 0.25rem;
+    line-height: 1rem;
+  }
+  
+  .text-2 {
+    font-weight: 600;
+  }
+
+  @media (max-width: 1200px) {
+    .text-2 {
+      font-size: 1.25rem;
+    }
+    .text-1 {
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .text-2 {
+      font-size: 1rem;
+    }
+    .text-1 {
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .text-2 {
+      font-size: 0.875rem;
+    }
+    .text-1 {
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .text-2 {
+      font-size: 0.75rem;
+    }
+    .text-1 {
+      font-size: 0.75rem;
+    }
+  }

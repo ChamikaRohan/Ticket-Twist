@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faMoneyBill1, faCalendarDays } from '@fortawesome/free-regular-svg-icons';
+
+library.add(faMoneyBill1, faCalendarDays);
 import { faPhone, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './ViewTicketPage.css'; // Make sure to import your CSS file
 
@@ -80,18 +84,26 @@ export default function ViewTicketPage() {
                       The seat is <strong>{mainTicket.seat_number}</strong> in the <strong>{mainTicket.section}</strong> section, 
                       and it is a <strong>{mainTicket.ticket_type}</strong> ticket.
                     </p>
-                    <p className="card-text">
-                      <strong>Validity Date:</strong> <span className="text-danger fw-bold">{new Date(mainTicket.validity_date).toLocaleDateString()}</span>
-                    </p>
-                    <p className="card-text">
-                      <strong>Price :</strong> <span className="text-danger fw-bold">{mainTicket.price_lkr} LKR</span>
-                    </p>
-                      <div>
-                        <h5 className="card-title mt-4">Contact Ticket Owner</h5>
-                        <p className="card-text"><FontAwesomeIcon icon={faUser} /> <strong>Name:</strong> {ticketOwner.first_name} {ticketOwner.last_name}</p>
-                        <p className="card-text"><FontAwesomeIcon icon={faPhone} /> <strong>Tel:</strong> {ticketOwner.phone_number}</p>
-                        <p className="card-text"><FontAwesomeIcon icon={faEnvelope} /> <strong>Email:</strong> {ticketOwner.email}</p>
-                      </div>
+
+                    <div style={{ display: "flex", justifyContent: "center", gap: "12px" }}>
+                      <a class="playstore-button" href="#">
+                        <FontAwesomeIcon icon="fa-regular fa-money-bill-1" size="2x"/>
+                        <span class="texts">
+                          <span class="text-1">Get for</span>
+                          <span class="text-2" style={{ color: "red" }}>{mainTicket.price_lkr}LKR</span>
+                        </span>
+                      </a>
+
+                      <a class="playstore-button" href="#">
+                        <FontAwesomeIcon icon="fa-regular fa-calendar-days" size="2x"/>
+                        <span class="texts">
+                          <span class="text-1">Valid on</span>
+                          <span class="text-2" style={{ color: "red" }}>{new Date(mainTicket.validity_date).toLocaleDateString()}</span>
+                        </span>
+                      </a>
+                    </div>
+   
+
                   </div>
                 </div>)}
 
