@@ -48,7 +48,7 @@ export default function NavBar() {
           </Nav>
           <Nav>
             <Nav.Link onClick={()=>navigate("#about")}>About</Nav.Link>
-            <Nav.Link eventKey={2} onClick={() => {userStatus ? navigate("/#profile") : navigate("/signup");}} >
+            <Nav.Link eventKey={2} onClick={() => {userStatus ? navigate("/profile") : navigate("/signup");}} >
               {userStatus ? "Profile" : "Switch to Selling"}
             </Nav.Link>
           </Nav>
