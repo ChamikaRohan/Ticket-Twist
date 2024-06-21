@@ -12,3 +12,4 @@ export const checkUser = async()=>{
   if (response.status == 401) {return false;}
   else if (data.user === true) {return true;};
 }
+
