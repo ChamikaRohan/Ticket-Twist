@@ -40,7 +40,7 @@ export const signinOwner = async(req, res) =>{
             if (validPassword == false) return res.status(401).json({error: "Invalid credentials!"});
             const token = jwt.sign({id: userExists["_id"]}, process.env.JWT_SECRET);
             const {password: pass, ...rest} = userExists.toObject();
-            res.cookie("access_token", token, {httpOnly: true, secure: true}).status(200).json(rest);
+            res.cookie("access_token", token, {httpOnly: true, sameSite: 'None'}).status(200).json(rest);
         }
         else
         {
@@ -50,7 +50,7 @@ export const signinOwner = async(req, res) =>{
             if (validPassword == false) return res.status(401).json({error: "Invalid credentials!"});
             const token = jwt.sign({id: userExists["_id"]}, process.env.JWT_SECRET);
             const {password: pass, ...rest} = userExists.toObject();
-            res.cookie("access_token", token, {httpOnly: true, secure: true}).status(200).json(rest);
+            res.cookie("access_token", token, {httpOnly: true, sameSite: 'None'}).status(200).json(rest);
         }
     }
     catch(error)
