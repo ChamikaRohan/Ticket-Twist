@@ -1,4 +1,4 @@
-.card {
+.card-profile {
     width: 100%;
     padding: 12px;
     background: #171717;
@@ -12,7 +12,7 @@
     gap: 12px
   }
   
-  .card span {
+  .card-profile span {
     font-weight: bold;
     color: white;
     text-align: center;
@@ -20,7 +20,7 @@
     font-size: 1em;
   }
   
-  .card .info {
+  .card-profile .info {
     font-weight: 400;
     color: white;
     display: block;
@@ -29,7 +29,7 @@
     margin: 1em;
   }
   
-  .card .img {
+  .card-profile .img {
     width: 10.8em;
     height: 11.8em;
     background: white;
@@ -39,23 +39,23 @@
     border-width: 1.5px;
   }
   
-  .card .share {
+  .card-profile .share {
     margin-top: 1em;
     display: flex;
     justify-content: center;
     gap: 1em;
   }
   
-  .card a {
+  .card-profile a {
     color: white;
     transition: .4s ease-in-out;
   }
   
-  .card a:hover {
+  .card-profile a:hover {
     color: red;
   }
   
-  .card button {
+  .card-profile button {
     padding: 0.8em 1.7em;
     display: block;
     margin: auto;
@@ -67,7 +67,7 @@
     transition: .4s ease-in-out;
   }
   
-  .card button:hover {
+  .card-profile button:hover {
     background: red;
     color: white;
     cursor: pointer;
@@ -200,3 +200,88 @@
     position: relative;
    }
   
+
+   
+.content > *, .modal > * {
+  padding: 0.875em;
+}
+
+  .title {
+    font-size: 1.25em;
+    font-weight: 600;
+    line-height: 1.2;
+    display: flex;
+    justify-content: center;
+  }
+
+   .message {
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .upload-btn {
+    background-color: transparent;
+    border: 0.125rem dashed hsla(223,10%,50%,0.4);
+    flex: 1;
+    padding: 0.375rem 2rem;
+  }
+  
+  .upload-btn:hover {
+    background-color: hsla(223,10%,60%,0.2);
+  }
+  
+  .close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(226, 94, 54);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .result {
+    margin-top: 4px;
+    background-color: rgba(0, 140, 255, 0.062);
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 1em;
+  }
+  
+  .file-uploaded {
+    font-weight: 300;
+  }
+  
+  .file-uploaded::before {
+    position: absolute;
+    content: "X";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(26, 7, 1, 0.212);
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    right: 10px;
+    top: 10px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .file-uploaded:hover::before {
+    background-color: rgba(233, 40, 6, 0.664);
+  }

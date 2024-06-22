@@ -3,12 +3,16 @@ import Layout from '../components/Layout'
 import "./ProfilePage.css"
 import { retriveUserID } from '../middlewares/RetriveUserID';
 import UnknownOwner from "../assets/UnknownOwner.jpg"
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export default function ProfilePage() {
     const apiURL = import.meta.env.VITE_API_BASE_URL;
 
     const [owner, setOwner] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [selectedimg, setSelectedimg] = useState("");
+    const [selectedURL, setSelectedURL] = useState("")
 
     const getOwnerDetails = async () => {
         try 
@@ -34,6 +38,33 @@ export default function ProfilePage() {
         getOwnerDetails();
     },[]);
 
+    const handleProPicChange = async(e) =>{
+        e.preventDefault();
+        if(!selectedimg){console.log("No file selected!");return;}
+        try
+        {
+            const fromdata = new FormData();
+            fromdata.append("file", selectedimg);
+
+            const response = await fetch(`${apiURL}/owner/create-ownerimg`,{
+                method: "POST",
+                body: fromdata
+            });
+            const data = await response.json();
+            setSelectedURL(data[["downloadURL"]]);
+            console.log(data.message);
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
+    }
+
+    const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <Layout>
     <section className="d-flex justify-content-center align-items-center text-center text-white">
@@ -47,8 +78,8 @@ export default function ProfilePage() {
     <div class="profile-loader"></div>
     </div>
     :
-    <div class="card">
-        <img class="img" src={UnknownOwner}></img>
+    <div class="card-profile">
+        <img onClick={handleShow} class="img" src={UnknownOwner}></img>
     
         <form class="form-owner">
             <p class="form-owner-title">Hello again!</p>
@@ -75,6 +106,24 @@ export default function ProfilePage() {
     </div>
     </div>
     </section>
+    <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title><span class="title">Edit profile picture image</span></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <p class="message">Select a image to upload from your computer or device.</p>
+            <div class="actions">
+          <label for="file" class="button upload-btn">Choose File
+            <input hidden="true" type="file" id="file" onChange={(e)=>setSelectedimg(e.target.files[0])}/>
+          </label>
+        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleProPicChange}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Layout>
   )
 }

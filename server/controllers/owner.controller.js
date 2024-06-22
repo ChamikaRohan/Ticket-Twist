@@ -1,6 +1,12 @@
 import Owner from "../models/owner.model.js"
 import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken";
+import { initializeApp } from "firebase/app"
+import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage"
+import fconfig from "../firebase/firebaseConfig.js"
+
+initializeApp(fconfig.firebaseConfig);
+const storage = getStorage();
 
 export const signupOwner = async (req, res) =>{
     try
@@ -74,5 +80,38 @@ export const getOwner = async (req, res) =>{
     catch(error)
     {
         res.status(500).json({error: "Internal server error!"});
+    }
+}
+
+export const uploadFile = async (req, res) => {
+    try {
+      const currentDateTime = new Date();
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+  
+      const storageRef = ref(storage, `propics/${req.file.originalname}+${currentDateTime}`);
+      const metadata = {
+        contentType: req.file.mimetype,
+      };
+  
+      const uploadTask = uploadBytesResumable(storageRef, req.file.buffer, metadata);
+  
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          // Handle upload progress
+        },
+        (error) => {
+          res.status(500).json({ error: error.message });
+        },
+        async () => {
+          // Upload completed successfully, get the download URL
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          res.status(200).json({ message: "Profile picture uploaded successfully!", downloadURL });
+        }
+      );
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
 }
