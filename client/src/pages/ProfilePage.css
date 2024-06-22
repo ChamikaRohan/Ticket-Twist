@@ -1,6 +1,6 @@
 .card-profile {
     width: 100%;
-    padding: 12px;
+    padding: 20px;
     background: #171717;
     transition: 1s ease-in-out;
     clip-path: polygon(30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0% 30px);
@@ -60,7 +60,7 @@
     display: block;
     margin: auto;
     border-radius: 25px;
-    border: none;
+    border: solid #f3a42f;
     font-weight: bold;
     background: #ffffff;
     color: rgb(0, 0, 0);
