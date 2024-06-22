@@ -26,6 +26,10 @@ const ownerSchema = mongoose.Schema({
     address: {
         required: true,
         type: String
+    },
+    propic: {
+        required: false,
+        type: String
     }
 }, {timestamps: true});
 

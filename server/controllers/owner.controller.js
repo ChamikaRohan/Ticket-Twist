@@ -115,3 +115,34 @@ export const uploadFile = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
 }
+
+export const updateOwner = async (req, res) =>{
+  try
+  {
+      const reqData = req.body;
+      const _id = req.id;
+      const ownerExists = await Owner.findOne({_id});
+      if ( ownerExists == null ) return res.status(400).json({error: "Unautherized owner, access forbidden!"});
+      
+      if ( (reqData.first_name != undefined) && (reqData.first_name != "" ) ) ownerExists.first_name = reqData.first_name;
+      if ( (reqData.last_name != undefined) && (reqData.last_name != "" ) ) ownerExists.last_name = reqData.last_name;
+      if ( (reqData.email != undefined) && (reqData.email != "" ) ) ownerExists.email = reqData.email;
+      if ( (reqData.password != undefined) && (reqData.password != "" ) ) 
+      {
+        const password = reqData.password;
+        const hashshedPassword = bcryptjs.hashSync(password, 10);
+        ownerExists.password = hashshedPassword;
+      }
+      if ( (reqData.phone_number != undefined) && (reqData.phone_number != "" ) ) ownerExists.phone_number = reqData.phone_number;
+      if ( (reqData.address != undefined) && (reqData.address != "" ) ) ownerExists.address = reqData.address;
+      if ( (reqData.propic != undefined) && (reqData.propic != "" ) ) ownerExists.propic = reqData.propic;
+      
+      const updatedOwner = await Owner.findByIdAndUpdate(_id, ownerExists, { new: true });
+      console.log(updateOwner);
+      res.status(200).json({message: "Owner updated sucessfully!"});
+  }
+  catch(error)
+  {
+      res.status(500).json({error: "Internal server error!"});
+  }
+}
