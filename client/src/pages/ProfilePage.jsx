@@ -5,6 +5,7 @@ import { retriveUserID } from '../middlewares/RetriveUserID';
 import UnknownOwner from "../assets/UnknownOwner.jpg"
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function ProfilePage() {
     const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -16,11 +17,12 @@ export default function ProfilePage() {
     const [email, setEmail] = useState("");
     const [pnumber, setPnumber] = useState("");
     const [address, setAddress] = useState("");
-    const [password, setPassword] = useState("");
 
     const [loading, setLoading] = useState(true);
     const [selectedimg, setSelectedimg] = useState("");
     const [selectedURL, setSelectedURL] = useState("")
+    const [imguploadloading, setImguploadloading] = useState(false);
+    const [profileuploadloading, setProfileuploadloading] = useState(false);
 
     const getOwnerDetails = async () => {
         try 
@@ -62,6 +64,7 @@ export default function ProfilePage() {
     const handleProPicChange = async(e) =>{
         e.preventDefault();
         if(!selectedimg){console.log("No file selected!");return;}
+        setImguploadloading(true);
         try
         {
             const fromdata = new FormData();
@@ -72,12 +75,16 @@ export default function ProfilePage() {
                 body: fromdata
             });
             const data = await response.json();
+            setImguploadloading(false);
             setSelectedURL(data[["downloadURL"]]);
+            toast.success('Profile picture uploaded sucessfully!', { duration: 1500 });
             handleClose();
             console.log(data.message);
         }
         catch(error)
         {
+            setImguploadloading(false);
+            toast.error('Profile picture upload unsucessfull!', { duration: 1500 });
             console.log(error);
         }
     }
@@ -89,16 +96,28 @@ export default function ProfilePage() {
 
   const handleUpdateOwner = async(e)=>{
     e.preventDefault();
-    const response = await fetch(`${apiURL}/owner/update-owner`,{
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json"
-      },
-      body: JSON.stringify({first_name: fname, last_name: lname, email, phone_number: pnumber, address, propic: selectedURL}),
-      credentials: "include"
-    });
-    const data = await response.json();
-    console.log(data);
+    setProfileuploadloading(true);
+    try
+    {
+      const response = await fetch(`${apiURL}/owner/update-owner`,{
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({first_name: fname, last_name: lname, email, phone_number: pnumber, address, propic: selectedURL}),
+        credentials: "include"
+      });
+      const data = await response.json();
+      setProfileuploadloading(false);
+      toast.success('Profile updated successfully!', { duration: 1500 });
+      console.log(data);
+    }
+    catch(error)
+    {
+        setProfileuploadloading(false);
+        toast.error('Profile update unsuccessfull!', { duration: 1500 });
+        console.log(error);
+    }
   }
 
   return (
@@ -129,8 +148,21 @@ export default function ProfilePage() {
                         <input type="text" value={address} onChange={(e)=>setAddress(e.target.value)} placeholder="Enter address" />
                 
                 </div>
-
+                {!profileuploadloading? 
                 <button type="submit" onClick={handleUpdateOwner}class="form-owner-submit">Update my profile</button>
+                :
+                <div style={{ display: "flex", justifyContent: "center"}}>
+                  <div class="dot-spinner">
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                    <div class="dot-spinner__dot"></div>
+                </div>
+              </div>}
         </form>
     </div>}
     
@@ -149,12 +181,27 @@ export default function ProfilePage() {
           </label>
         </div>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{ display: "flex", justifyContent: "center"}}>
+          {!imguploadloading? 
           <Button variant="primary" onClick={handleProPicChange}>
-            Upload Image
-          </Button>
+          Upload Image
+        </Button> 
+        :
+        (
+          <div class="dot-spinner">
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+            <div class="dot-spinner__dot"></div>
+        </div>
+        )}
         </Modal.Footer>
       </Modal>
+      <Toaster position="top-center" reverseOrder={false} />
     </Layout>
   )
 }
