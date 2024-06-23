@@ -113,7 +113,6 @@
     justify-content: center;
     border: 2px solid #000;
     border-radius: 9999px;
-    background-color: #f3a42f;
     padding: 0.625rem 1.5rem;
     text-align: center;
     color: black;
@@ -185,3 +184,108 @@
       font-size: 0.75rem;
     }
   }
+
+
+  
+
+
+  .btn-buy {
+    outline: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f3a42f;
+    min-width: 100%;
+    border: solid;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    padding: 16px 20px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .btn-buy:hover {
+    background-color: white;
+  }
+  
+  .btn-buy .animation {
+    border-radius: 100%;
+    animation: ripple 0.5s linear infinite;
+  }
+  
+  @keyframes ripple {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+    }
+  
+    100% {
+      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+    }
+  }
+
+
+
+
+
+  .card-request {
+    width: 100%;
+    height: auto;
+    background: transparent;
+    border-radius: 15px;
+   }
+   
+   .card-request .card-request-border-top {
+    width: 60%;
+    height: 3%;
+    margin: auto;
+    border-radius: 0px 0px 15px 15px;
+   }
+   
+   .card-request span {
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    display: block;
+    padding-top: 10px;
+    font-size: 16px;
+   }
+   
+   .card-request .address {
+    font-weight: 300;
+    color: black;
+    display: block;
+    text-align: center;
+    padding-top: 3px;
+    font-size: 12px;
+   }
+   
+   .card-request .img {
+    width: 70px;
+    height: 80px;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 25px;
+    box-shadow: 1px 5px 60px 0px #f3a42f;
+   }
+   
+   .card-request button {
+    padding: 8px 25px;
+    display: block;
+    margin: auto;
+    border-radius: 8px;
+    border: none;
+    margin-top: 30px;
+    background: #6b64f3;
+    color: white;
+    font-weight: 600;
+   }
+   
+   .card-request button:hover {
+    background: #534bf3;
+   }

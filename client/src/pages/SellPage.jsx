@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import { Toaster, toast } from 'react-hot-toast';
+import { retriveUserID } from "../middlewares/RetriveUserID"
 
 export default function SellPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -21,6 +22,7 @@ export default function SellPage() {
   const [validationcode, setValidationcode] = useState('');
   const [selectedImg, setSelectedImg] = useState('');
   const [imageURL, setImageURL] = useState('');
+  const [owner_id, setOwner_id] = useState('');
 
   const [imgUploadStatus, setImgUploadStatus] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
@@ -55,6 +57,15 @@ export default function SellPage() {
     }
   };
 
+  const fetchUserid = async () => {
+    const id = await retriveUserID();
+    setOwner_id(id);
+  };
+
+  useEffect(() => {
+    fetchUserid();
+  }, []);
+
   const handleSubmit = async () => {
     try {
       const response = await fetch(`${apiURL}/main-ticket/create-main-ticket`, {
@@ -74,6 +85,7 @@ export default function SellPage() {
           ticket_type: ticketType,
           special_instructions: specialInstructions,
           image: imageURL,
+          owner_id
         }),
       });
 
@@ -122,7 +134,7 @@ export default function SellPage() {
     setQrcode('');
     setValidationcode('');
   };
-
+  console.log(owner_id);
   return (
     <Layout>
       <section className="d-flex justify-content-center align-items-center text-center text-white">

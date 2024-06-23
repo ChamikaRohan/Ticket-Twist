@@ -11,6 +11,7 @@ export default function ProfilePage() {
     const apiURL = import.meta.env.VITE_API_BASE_URL;
 
     const [owner, setOwner] = useState(null);
+    const [show, setShow] = useState(false);
 
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
@@ -88,8 +89,6 @@ export default function ProfilePage() {
             console.log(error);
         }
     }
-
-    const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
