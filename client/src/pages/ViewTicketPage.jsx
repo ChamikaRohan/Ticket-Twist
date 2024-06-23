@@ -8,6 +8,7 @@ import { faPhone, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './ViewTicketPage.css'; 
 import UnknownOwner from "../assets/UnknownOwner.jpg"
 import Modal from 'react-bootstrap/Modal';
+const Logo = "https://firebasestorage.googleapis.com/v0/b/tickettwist-eb954.appspot.com/o/Logo%2FLogo.png?alt=media&token=54bf0b25-388b-44fe-9f6a-606c8bf04dbf"
 
 library.add(faMoneyBill1, faCalendarDays);
 
@@ -19,6 +20,10 @@ export default function ViewTicketPage() {
   const [loading, setLoading] = useState(true);
   const { _id } = useParams();
   const [show, setShow] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [requesterName, setRequesterName] = useState("");
+  const [requesterEmail, setRequesterEmail] = useState("");
+  const [requesterPhone, setRequesterPhone] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -65,8 +70,56 @@ export default function ViewTicketPage() {
     }
   }, [mainTicket, apiURL]);
 
-  const handleRequest = () => {
+  const handleRequestEmail = async(e) => {
+    e.preventDefault();
 
+    const emailSubject = "Ticket Request Notification by TicketTwist Team";
+
+    const emailBody = `
+      <html>
+    <body>
+      <p>Hello,</p>
+
+      <p>You have received a request for one of your tickets!</p>
+
+      <p>Requested Ticket Details:</p>
+      <ul>
+        <li><strong>Ticket Name:</strong> ${mainTicket.name}</li>
+        <li><strong>Ticket ID:</strong> ${mainTicket.ticket_id}</li>
+      </ul>
+
+      <p>Requester's Contact Details:</p>
+      <ul>
+        <li><strong>Name:</strong> ${requesterName}</li>
+        <li><strong>Email:</strong> ${requesterEmail}</li>
+        <li><strong>Phone Number:</strong> ${requesterPhone}</li>
+      </ul>
+
+      <p>Please take appropriate action regarding this request.</p>
+
+      <p>Regards,<br>TicketTwist Team</p>
+
+      <!-- Include logo image -->
+      <img src=${Logo} alt="Logo">
+
+    </body>
+  </html>
+`;
+
+    const response = await fetch(`${apiURL}/owner/email-to-owner`,{
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({recipientEmail: ticketOwner.email, subject: emailSubject, message: emailBody})
+    });
+    const data = await response.json();
+    console.log(data);
+
+  };
+
+  const handleFormOpen = () => {
+    setShowForm(1-showForm);
   };
 
   return (
@@ -139,8 +192,25 @@ export default function ViewTicketPage() {
               <FontAwesomeIcon icon={faPhone} /> {ticketOwner.phone_number}<br/>
               <FontAwesomeIcon icon={faEnvelope} /> {ticketOwner.email}
             </p>
-            <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
-              <button className='but-email'>Request via email</button>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "20px" }}>
+              <button onClick={handleFormOpen} className='but-email'>{showForm? "Cancel Request" : "Request via email"}</button>
+              {showForm ? (
+              <form class="form-email">
+                <div class="input-container">
+                  <input value={requesterName} onChange={(e)=>setRequesterName(e.target.value)} type="text" placeholder="Your full name"/>
+                </div>
+                <div class="input-container">
+                  <input value={requesterEmail} onChange={(e)=>setRequesterEmail(e.target.value)} type="email" placeholder="Your email address"/>
+                </div>
+                <div class="input-container">
+                  <input value={requesterPhone} onChange={(e)=>setRequesterPhone(e.target.value)} type="text" placeholder="Your contact number"/>
+                </div>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", marginBlock: "10px" }}>
+                  <button disabled={!requesterName || !requesterEmail || !requesterPhone} type="submit" class="but-email" onClick={handleRequestEmail}>Send Email</button>
+                </div>
+              </form>):
+              ('')}
+            
             </div>
           </div>
         ) : (

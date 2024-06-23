@@ -149,7 +149,7 @@ export const updateOwner = async (req, res) =>{
 }
 
 export const sendMail = async (req, res) => {
-  const { recipientEmail, subject,message } = req.body;
+  const { recipientEmail, subject, message } = req.body;
 
   try 
   {
@@ -167,10 +167,9 @@ export const sendMail = async (req, res) => {
       from: process.env.TICKETTWIST_EMAIL,
       to: recipientEmail,
       subject: subject,
-      text: message
+      html: message
     });
-    console.log(info);
-    console.log('Email sent: ' + info.response);
+
     res.status(200).json('Email sent successfully');
   }
   catch (error) 
