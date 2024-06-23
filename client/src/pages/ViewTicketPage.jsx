@@ -8,6 +8,7 @@ import { faPhone, faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './ViewTicketPage.css'; 
 import UnknownOwner from "../assets/UnknownOwner.jpg"
 import Modal from 'react-bootstrap/Modal';
+import { Toaster, toast } from 'react-hot-toast';
 const Logo = "https://firebasestorage.googleapis.com/v0/b/tickettwist-eb954.appspot.com/o/Logo%2FLogo.png?alt=media&token=54bf0b25-388b-44fe-9f6a-606c8bf04dbf"
 
 library.add(faMoneyBill1, faCalendarDays);
@@ -106,6 +107,8 @@ export default function ViewTicketPage() {
   </html>
 `;
 
+  try
+  {
     const response = await fetch(`${apiURL}/owner/email-to-owner`,{
       method: "POST",
       headers: {
@@ -114,8 +117,14 @@ export default function ViewTicketPage() {
       body: JSON.stringify({recipientEmail: ticketOwner.email, subject: emailSubject, message: emailBody})
     });
     const data = await response.json();
+    toast.success('Request email sent successfully!', { duration: 1500 });
     console.log(data);
-
+  }
+  catch(error)
+  {
+    toast.success('Request email sent unseccessfull!', { duration: 1500 });
+    console.log(error);
+  }
   };
 
   const handleFormOpen = () => {
@@ -217,6 +226,7 @@ export default function ViewTicketPage() {
           <p>Loading...</p>
         )}
       </Modal>
+      <Toaster position="top-center" reverseOrder={false} />
     </Layout>
   );
 }
