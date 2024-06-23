@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { initializeApp } from "firebase/app"
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage"
 import fconfig from "../firebase/firebaseConfig.js"
+import nodemailer from 'nodemailer';
 
 initializeApp(fconfig.firebaseConfig);
 const storage = getStorage();
@@ -144,5 +145,36 @@ export const updateOwner = async (req, res) =>{
   catch(error)
   {
       res.status(500).json({error: "Internal server error!"});
+  }
+}
+
+export const sendMail = async (req, res) => {
+  const { recipientEmail, subject,message } = req.body;
+
+  try 
+  {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.TICKETTWIST_EMAIL, 
+        pass: process.env.TICKETTWIST_EMAIL_PASSWORD
+      }
+    });
+
+    const info = await transporter.sendMail({
+      from: process.env.TICKETTWIST_EMAIL,
+      to: recipientEmail,
+      subject: subject,
+      text: message
+    });
+    console.log(info);
+    console.log('Email sent: ' + info.response);
+    res.status(200).json('Email sent successfully');
+  }
+  catch (error) 
+  {
+    res.status(500).json('Error sending email');
   }
 }
