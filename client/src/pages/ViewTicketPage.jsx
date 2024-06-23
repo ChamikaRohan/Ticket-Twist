@@ -127,19 +127,25 @@ export default function ViewTicketPage() {
         <Modal.Header closeButton>
           <Modal.Title><span class="title">Contact ticket owner</span></Modal.Title>
         </Modal.Header>
-        {ticketOwner? 
-        <div class="card-request">
-          <div class="card-request-border-top">
+        {ticketOwner ? (
+          <div className="card-request">
+            <div className="card-request-border-top"></div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img className="img" src={ticketOwner.propic ? ticketOwner.propic : UnknownOwner} alt="Owner Profile" />
+            </div>
+            <span>{ticketOwner.first_name} {ticketOwner.last_name}</span>
+            <p className="owner-details">
+              <i className="fa-solid fa-location-dot" style={{ fontSize: "11px" }}/> {ticketOwner.address}<br/>
+              <FontAwesomeIcon icon={faPhone} /> {ticketOwner.phone_number}<br/>
+              <FontAwesomeIcon icon={faEnvelope} /> {ticketOwner.email}
+            </p>
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+              <button className='but-email'>Request via email</button>
+            </div>
           </div>
-            <div style={{ display: "flex" , alignItems: "center" }}>
-          <img class="img" src={ticketOwner.propic? ticketOwner.propic :UnknownOwner}/>
-          </div>
-          <span>{ticketOwner.first_name} {ticketOwner.last_name}</span>
-          <p class="address"><i class="fa-solid fa-location-dot" style={{ fontSize: "11px" }}></i> {ticketOwner.address}</p>
-        </div>
-        :
-        <p>Loading...</p>}
-
+        ) : (
+          <p>Loading...</p>
+        )}
       </Modal>
     </Layout>
   );
