@@ -30,19 +30,19 @@ export default function NavBar() {
             <Nav.Link onClick={()=>navigate("/explore")}>Explore</Nav.Link>
             <Nav.Link onClick={()=>navigate("/#search")}>Search</Nav.Link>
             <NavDropdown title="Categories" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">ICC Cricket</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">IPL Cricket</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Musical Event</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Theatre and Performing Arts</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Football Match</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Theme Parks</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Attractions</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Fairs and Expos</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">Other</NavDropdown.Item>
-              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={()=>navigate("/category/ICC Cricket")}>ICC Cricket</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/IPL Cricket")}>IPL Cricket</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Musical Event")}>Musical Event</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Theatre and Performing Arts")}>Theatre and Performing Arts</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Football Match")}>Football Match</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Theme Parks")}>Theme Parks</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Attractions")}>Attractions</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Fairs and Expos")}>Fairs and Expos</NavDropdown.Item>
+              <NavDropdown.Item onClick={()=>navigate("/category/Other")}>Other</NavDropdown.Item>
+              {/* <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link
-              </NavDropdown.Item>
+              </NavDropdown.Item> */}
             </NavDropdown>
             {userStatus? <Nav.Link onClick={()=>navigate("/sell-ticket")}>Sell</Nav.Link> : ''}
           </Nav>
