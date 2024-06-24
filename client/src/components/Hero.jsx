@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Hero.css";
 import { TypeAnimation } from 'react-type-animation';
+import { useNavigate } from 'react-router-dom';
+import { checkUser } from '../middlewares/CheckUser.js';
 
 export default function Hero() {
+  const [userStatus, setUserStatus] = useState(false);
+  const navigate = useNavigate();
+
+  const fetchUserStatus = async () => {
+    const checkedUser = await checkUser();
+    setUserStatus(checkedUser);
+  };
+
+  useEffect(() => {
+    fetchUserStatus();
+  }, []);
+
+
   return (
     <section className="hero-section d-flex justify-content-center align-items-center text-center text-white">
       <div className='container' style={{ margin: "60px", maxWidth: "600px" }}>
@@ -23,8 +38,8 @@ export default function Hero() {
         />
         <p className="fs-6" style={{ marginTop: "30px" }}>Find tickets for concerts, sports, theater, and more. Join a community of event enthusiasts and never miss out on your favorite events</p>
         <div style={{ marginTop: "30px" ,display: "flex", gap: "30px", alignItems: "center", justifyContent: "center"}}>
-          <button className='button-browse' style={{ maxWidth: "150px" }}>Browse Tickets</button>
-          <button className='button-browse' style={{ maxWidth: "150px" }}>Sell Tickets</button>
+          <button className='button-browse' style={{ maxWidth: "150px" }} onClick={()=>{navigate("/explore")}}>Browse Tickets</button>
+          <button className='button-browse' style={{ maxWidth: "150px" }} onClick={()=>{userStatus? navigate("/sell-ticket") : navigate("/signup")}} >Sell Tickets</button>
         </div>
       </div>
     </section>
