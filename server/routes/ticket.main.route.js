@@ -1,4 +1,4 @@
-import { createMainTicket, getAllMainTickets, getMainTicket, searchTicket, deleteMainTicket, deleteFullTicket, uploadFile } from "../controllers/ticket.main.controller.js";
+import { createMainTicket, getAllMainTickets, getMainTicket, searchTicket, deleteMainTicket, deleteFullTicket, uploadFile, getTicketsByCategory } from "../controllers/ticket.main.controller.js";
 import express, { Router } from "express"
 import { initializeApp } from "firebase/app";
 import fconfig from "../firebase/firebaseConfig.js"
@@ -16,5 +16,6 @@ route.get("/search-ticket/:query", searchTicket);
 route.delete("/delete-main-ticket/:_id", deleteMainTicket);
 route.delete("/delete-full-ticket/:_id", deleteFullTicket);
 route.post("/create-ticketimg",uploadFileMulter.single('file'), uploadFile);
+route.get("/get-tickets-by-category/:category", getTicketsByCategory);
 
 export default route;

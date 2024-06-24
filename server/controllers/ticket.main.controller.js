@@ -139,3 +139,17 @@ export const uploadFile = async (req, res) => {
       res.status(500).json({ error: err.message });
     }
 }
+
+
+export const getTicketsByCategory = async(req, res) =>{
+    try
+    {
+        const {category} = req.params;
+        const ticketsByCategory = await MainTicket.find({category});
+        res.status(200).json(ticketsByCategory);    
+    }
+    catch(error)
+    {
+        res.status(500).json({error: "Internal server error!"});
+    }
+}
