@@ -1,0 +1,156 @@
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .ticket-container > * {
+    flex: 1 1 350px; /* Ensures each card takes up at least 350px and flexes to fill space */
+    max-width: 100%;
+  }
+  
+  @media (min-width: 992px) {
+    .ticket-container > * {
+      flex: 1 1 calc(50% - 40px); /* Two cards per row with margin */
+      max-width: calc(50% - 40px);
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .ticket-container > * {
+      flex: 1 1 100%; /* One card per row */
+      max-width: 100%;
+    }
+  }
+
+  .explore-loader {
+    position: relative;
+    width: 2.5em;
+    height: 2.5em;
+    transform: rotate(165deg);
+   }
+   
+   .explore-loader:before, .explore-loader:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 0.25em;
+    transform: translate(-50%, -50%);
+   }
+   
+   .explore-loader:before {
+    animation: before8 2s infinite;
+   }
+   
+   .explore-loader:after {
+    animation: after6 2s infinite;
+   }
+   
+   @keyframes before8 {
+    0% {
+     width: 0.5em;
+     box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+    }
+   
+    35% {
+     width: 2.5em;
+     box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+    }
+   
+    70% {
+     width: 0.5em;
+     box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
+    }
+   
+    100% {
+     box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+    }
+   }
+   
+   @keyframes after6 {
+    0% {
+     height: 0.5em;
+     box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+    }
+   
+    35% {
+     height: 2.5em;
+     box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
+    }
+   
+    70% {
+     height: 0.5em;
+     box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+    }
+   
+    100% {
+     box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+    }
+   }
+   
+   .explore-loader {
+    position: relative;
+    
+   }
+  
+
+
+
+   .ticket-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .ticket-search__input {
+    font-family: inherit;
+    font-size: inherit;
+    background-color: white;
+    border: none;
+    color: #646464;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    width: 20em;
+    transition: all ease-in-out .5s;
+    margin-right: -2rem;
+  }
+  
+  .ticket-search__input:hover, .ticket-search__input:focus {
+    box-shadow: 0 0 1em #00000013;
+  }
+  
+  .ticket-search__input:focus {
+    outline: none;
+    background-color: white;
+  }
+  
+  .ticket-search__input::-webkit-input-placeholder {
+    font-weight: 100;
+    color: #ccc;
+  }
+  
+  .ticket-search__input:focus + .ticket-search__button {
+    background-color: white;
+  }
+  
+  .ticket-search__button {
+    border: none;
+    background-color: white;
+    margin-top: .1em;
+  }
+  
+  .ticket-search__button:hover {
+    cursor: pointer;
+  }
+  
+  .ticket-search__icon {
+    height: 1.5em;
+    width: 0.9em;
+    fill: black;
+    background-color: transparent;
+  }

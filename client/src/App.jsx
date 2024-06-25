@@ -8,6 +8,7 @@ import SellPage from './pages/SellPage.jsx'
 import ViewTicketPage from './pages/ViewTicketPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
 import CategoryPage from './pages/CategoryPage.jsx'
+import SearchPage from './pages/SearchPage.jsx'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/view-ticket/:_id" element={<ViewTicketPage/>} />
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/category/:category" element={<CategoryPage/>} />
+        <Route path="/search" element={<SearchPage/>} />
       </Routes>
     </Router>
   )

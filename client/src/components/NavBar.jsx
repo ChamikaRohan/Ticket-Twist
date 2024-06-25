@@ -28,7 +28,7 @@ export default function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link onClick={()=>navigate("/explore")}>Explore</Nav.Link>
-            <Nav.Link onClick={()=>navigate("/#search")}>Search</Nav.Link>
+            <Nav.Link onClick={()=>navigate("/search")}>Search</Nav.Link>
             <NavDropdown title="Categories" id="collapsible-nav-dropdown">
               <NavDropdown.Item onClick={()=>navigate("/category/ICC Cricket")}>ICC Cricket</NavDropdown.Item>
               <NavDropdown.Item onClick={()=>navigate("/category/IPL Cricket")}>IPL Cricket</NavDropdown.Item>
