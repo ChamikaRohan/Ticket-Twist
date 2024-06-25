@@ -40,7 +40,7 @@ export default function SearchPage() {
     <Layout>
       <section className="d-flex justify-content-center align-items-center text-center text-white">
         <div className="container" style={{ margin: '20px', maxWidth: '800px' }}>
-          <h2 className="fw-bolder display-5" style={{ color: '#f3a42f' }}>Explore Tickets</h2>
+          <h2 className="fw-bolder display-5" style={{ color: '#f3a42f' }}>Search Tickets</h2>
 
           <div className="ticket-search">
             <input

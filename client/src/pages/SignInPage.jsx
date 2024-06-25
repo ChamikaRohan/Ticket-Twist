@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './SignInPage.css';
 import { useNavigate } from "react-router-dom"
 import { Toaster, toast } from 'react-hot-toast';
+import Layout from '../components/Layout.jsx';
 
 export default function SignInPage() {
   const apiURL = import.meta.env.VITE_API_BASE_URL;
@@ -96,6 +97,7 @@ export default function SignInPage() {
   }
 
   return (
+    <Layout>
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", backgroundColor: "black", height: "100%"}}>
       
       <form className="form">
@@ -164,5 +166,6 @@ export default function SignInPage() {
       </form>
       <Toaster position="top-center" reverseOrder={false} />
     </div>
+    </Layout>
   );
 }
